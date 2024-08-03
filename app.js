@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const addButton = document.getElementById('add-btn');
     const inputField = document.getElementById('todo-input');
     const todolist = document.getElementById('todo-list');
+    const noTasksMessage = document.getElementById('no-tasks-message');
 
     // function to add a new todo item
     function createTodoItem(text) {
@@ -40,6 +41,15 @@ document.addEventListener('DOMContentLoaded', () => {
         return listItem;
     }
 
+    // Function tu update the visibility of the 'No tasks' message
+    function updateNoTasksMessage() {
+        if (todolist.children.length === 0) {
+            noTasksMessage.style.display = 'block';
+        } else {
+            noTasksMessage.style.display = 'none';
+        }
+    }
+
     // Event listener for the add button
     addButton.addEventListener('click', () => {
         const text = inputField.value.trim();
@@ -47,6 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const newTodo = createTodoItem(text);
             todolist.appendChild(newTodo);
             inputField.value = '';
+            updateNoTasksMessage();
         }
     });
 
@@ -56,4 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
             addButton.click();
         }
     });
+
+    // Initiallize updating of 'No tasks' message visibility
+    updateNoTasksMessage();
 });
