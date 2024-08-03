@@ -7,7 +7,7 @@
     --container-text-color: #333;
     --button-background-color: #8B80F9;
     --button-text-color: #fff;
-}
+    }
 
 body {
     font-family: Arial, sans-serif;
@@ -31,7 +31,7 @@ body {
 
 #todo-input {
     padding: 10px;
-    width: 70%;
+    width: 60%;
     border: 1px solid var(--border-color);
     border-radius: 5px;
     margin: 20px 10px;
@@ -80,9 +80,8 @@ body {
 button {
     width: 90px;
     height: 30px;
-    font-size: clamp(16px, 2vw, 18px);
+    font-size: clamp(12px, 2vw, 16px);
     padding: 5px 10px;
-    margin-left: 5px;
     background-color: var(--button-background-color);
     color: var(--button-text-color);
     border: none;
@@ -95,6 +94,13 @@ button:hover {
     background-color: var(--hover-color);
 }
 
+.todo-item button {
+    width: 70px;
+    height: 25px;
+    font-size: clamp(12px, 2vw, 14px);
+    padding: 4px 8px;
+    margin-left: 5px;
+}
 .footer {
     color: var(--container-text-color);
     text-align: center;
@@ -119,29 +125,6 @@ button:hover {
 
 @media screen and (max-width: 768px) {
     .container {
-        width: 90%;
-        padding: 10px;
-    }
-
-    #todo-input {
-        width: 80%;
-    }
-
-    .todo-item span {
-        font-size: clamp(14px, 2vw, 16px);
-    }
-
-    button {
-        width: 80px;
-        height: 35px;
-        font-size: clamp(14px, 2vw, 16px);
-        padding: 3px 6px;
-        margin-left: 3px;
-    }
-}
-
-@media screen and (max-width: 480px) {
-    .container {
         width: 95%;
         padding: 5px;
     }
@@ -151,21 +134,25 @@ button:hover {
     }
 
     .todo-item {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-    }
-    .todo-item span {
-        font-size: clamp(12px, 2vw, 14px);
-        margin-bottom: 5px;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-rows: auto auto;
+        gap: 5px;
+        align-items: center;
     }
 
-    button {
-        width: 100%;
+    .todo-item span {
+        grid-column: 1 / -1;
+        margin-bottom: 10px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+
+    }
+
+    .todo-item button {
+        width: 95%;
         height: 35px;
-        font-size: clamp(12px, 2vw, 14px);
-        padding: 2px 3px;
-        margin-left: 0;
-        margin-bottom: 5px;
+        margin-left: 5px;
     }
 }

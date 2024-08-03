@@ -1,21 +1,22 @@
 document.addEventListener('DOMContentLoaded', () => {
     const addButton = document.getElementById('add-btn');
+    const exportButton = document.getElementById('export-btn');
     const inputField = document.getElementById('todo-input');
-    const todolist = document.getElementById('todo-list');
+    const todoList = document.getElementById('todo-list');
     const noTasksMessage = document.getElementById('no-tasks-message');
 
     // function to add a new todo item
     function createTodoItem(text) {
         const listItem = document.createElement('li');
         listItem.classList.add('todo-item');
-
+        
         const itemText = document.createElement('span');
         itemText.textContent = text;
 
         const completeButton = document.createElement('button');
         completeButton.textContent = 'Complete';
         completeButton.addEventListener('click', () => {
-            listItem.classList.toggle('completed');
+            itemText.classList.toggle('completed');
         });
 
         const editButton = document.createElement('button');
@@ -30,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const deleteButton = document.createElement('button');
         deleteButton.textContent = 'Delete';
         deleteButton.addEventListener('click', () => {
-            todolist.removeChild(listItem);
+            todoList.removeChild(listItem);
         });
 
         listItem.appendChild(itemText);
@@ -43,11 +44,33 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Function tu update the visibility of the 'No tasks' message
     function updateNoTasksMessage() {
-        if (todolist.children.length === 0) {
+        if (todoList.children.length === 0) {
             noTasksMessage.style.display = 'block';
         } else {
             noTasksMessage.style.display = 'none';
         }
+    }
+
+    // Function to export tasks as csv file
+    function exportToCSV() {
+        const rows = [];
+        const items = todoList.querySelectorAll('li');
+
+        rows.push(['Task', 'Status']);
+
+        items.forEach(item => {
+            const text  = item.querySelector('span').textContent;
+            const status = item.classList.contains('completed') ? 'Completed' : 'Pending';
+            rows.push([text, status]);
+        });
+
+        const csvContent = 'data:text/csv;charset=utf-8,' + rows.map(e => e.join(',')).join('\n');
+        
+        const link = document.createElement('a');
+        link.setAttribute('href', encodeURI(csvContent));
+        link.setAttribute('download', 'todo-list.csv');
+        document.body.appendChild(link);
+        link.click();
     }
 
     // Event listener for the add button
@@ -55,7 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const text = inputField.value.trim();
         if (text) {
             const newTodo = createTodoItem(text);
-            todolist.appendChild(newTodo);
+            todoList.appendChild(newTodo);
             inputField.value = '';
             updateNoTasksMessage();
         }
@@ -66,6 +89,11 @@ document.addEventListener('DOMContentLoaded', () => {
         if (event.key === 'Enter') {
             addButton.click();
         }
+    });
+
+    // Event listener for the export button
+    exportButton.addEventListener('click', () => {
+        exportToCSV();
     });
 
     // Initiallize updating of 'No tasks' message visibility
