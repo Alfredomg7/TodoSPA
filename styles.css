@@ -47,7 +47,7 @@ body {
 
 .todo-item {
     display: grid;
-    grid-template-columns: 1fr auto auto;
+    grid-template-columns: 1fr auto auto auto;
     align-items: center;
     padding: 10px;
     border-bottom: 1px solid var(--border-color);
@@ -59,7 +59,7 @@ body {
     overflow: auto;
     text-overflow: ellipsis;
     white-space: nowrap;
-    font-size: 12px + 2vw;
+    font-size: clamp(12px, 2vw, 16px);
 }
 
 .todo-item:last-child {
@@ -73,7 +73,7 @@ body {
 button {
     width: 90px;
     height: 30px;
-    font-size: 16px;
+    font-size: clamp(12px, 2vw, 16px);
     padding: 5px 10px;
     margin-left: 5px;
     background-color: var(--button-background-color);

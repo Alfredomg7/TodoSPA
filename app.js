@@ -17,6 +17,15 @@ document.addEventListener('DOMContentLoaded', () => {
             listItem.classList.toggle('completed');
         });
 
+        const editButton = document.createElement('button');
+        editButton.textContent = 'Edit';
+        editButton.addEventListener('click', () => {
+            const newText = prompt('Edit todo:', itemText.textContent);
+            if (newText && newText.trim()) {
+                itemText.textContent = newText;
+            }
+        });
+
         const deleteButton = document.createElement('button');
         deleteButton.textContent = 'Delete';
         deleteButton.addEventListener('click', () => {
@@ -25,6 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         listItem.appendChild(itemText);
         listItem.appendChild(completeButton);
+        listItem.appendChild(editButton);
         listItem.appendChild(deleteButton);
 
         return listItem;

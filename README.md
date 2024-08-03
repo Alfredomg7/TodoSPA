@@ -1,5 +1,6 @@
 ## Overview
-This is a simple JavaScript-based To-Do List application that allows users to add tasks, mark them as completed, and remove them. The application uses plain JavaScript for DOM manipulation and event handling.
+This is a basic JavaScript-based To-Do List application that allows users to add tasks, mark them as completed, edit, and delete them. 
+The application uses just vanilla Javascript and CSS.
 
 ## Features
 - Add Tasks: Enter a task in the input field and click "Add" to create a new to-do item.
