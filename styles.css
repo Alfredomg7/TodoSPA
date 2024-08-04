@@ -31,7 +31,7 @@ body {
 
 #todo-input {
     padding: 10px;
-    width: 60%;
+    width: 50%;
     border: 1px solid var(--border-color);
     border-radius: 5px;
     margin: 20px 10px;
@@ -78,7 +78,7 @@ body {
 }
 
 button {
-    width: 90px;
+    width: 80px;
     height: 30px;
     font-size: clamp(12px, 2vw, 16px);
     padding: 5px 10px;
@@ -92,6 +92,10 @@ button {
 
 button:hover {
     background-color: var(--hover-color);
+}
+
+#import-file {
+    display: none;
 }
 
 .todo-item button {

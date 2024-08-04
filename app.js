@@ -1,20 +1,28 @@
 document.addEventListener('DOMContentLoaded', () => {
     const addButton = document.getElementById('add-btn');
     const exportButton = document.getElementById('export-btn');
+    const importButton = document.getElementById('import-btn');
+    const importFileInput = document.getElementById('import-file');
     const inputField = document.getElementById('todo-input');
     const todoList = document.getElementById('todo-list');
     const noTasksMessage = document.getElementById('no-tasks-message');
 
     // function to add a new todo item
-    function createTodoItem(text) {
+    function createTodoItem(text, status = 'pending') {
         const listItem = document.createElement('li');
         listItem.classList.add('todo-item');
-        
+
         const itemText = document.createElement('span');
         itemText.textContent = text;
 
         const completeButton = document.createElement('button');
+        
+        if (status === 'completed') {
+            itemText.classList.add('completed');
+        }
+
         completeButton.textContent = 'Complete';
+        
         completeButton.addEventListener('click', () => {
             itemText.classList.toggle('completed');
         });
@@ -32,6 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
         deleteButton.textContent = 'Delete';
         deleteButton.addEventListener('click', () => {
             todoList.removeChild(listItem);
+            updateNoTasksMessage();
         });
 
         listItem.appendChild(itemText);
@@ -59,8 +68,9 @@ document.addEventListener('DOMContentLoaded', () => {
         rows.push(['Task', 'Status']);
 
         items.forEach(item => {
-            const text  = item.querySelector('span').textContent;
-            const status = item.classList.contains('completed') ? 'Completed' : 'Pending';
+            const span = item.querySelector('span');
+            const text  = span.textContent;
+            const status = span.classList.contains('completed') ? 'Completed' : 'Pending';
             rows.push([text, status]);
         });
 
@@ -71,6 +81,30 @@ document.addEventListener('DOMContentLoaded', () => {
         link.setAttribute('download', 'todo-list.csv');
         document.body.appendChild(link);
         link.click();
+    }
+
+    // function to import tasks from csv file
+    function importFromCSV(file) {
+        const reader = new FileReader();
+
+        reader.onload = function(event) {
+            const content = event.target.result;
+            const rows = content.split('\n').slice(1);
+
+            todoList.innerHTML = '';
+        
+            rows.forEach(row => {
+                const [text, status] = row.split(',');
+                if (text && status) {
+                    const completed = status.trim().toLowerCase() === 'completed';
+                    const newTodo = createTodoItem(text, completed ? 'completed' : 'pending');
+                    todoList.appendChild(newTodo);
+                }
+            });
+            updateNoTasksMessage();
+        };
+
+        reader.readAsText(file);
     }
 
     // Event listener for the add button
@@ -95,6 +129,21 @@ document.addEventListener('DOMContentLoaded', () => {
     exportButton.addEventListener('click', () => {
         exportToCSV();
     });
+
+    // Event listener for the import button
+    importButton.addEventListener('click', () => {
+        importFileInput.click();
+    });
+
+    // Event listener for the import file input
+    importFileInput.addEventListener('change', (event) => {
+        const file = event.target.files[0];
+        
+        console.log('file loaded', file);
+        importFromCSV(file);
+        console.log('import completed');
+        importFileInput.value = '';
+    }); 
 
     // Initiallize updating of 'No tasks' message visibility
     updateNoTasksMessage();
