@@ -26,7 +26,10 @@ Open `index.html` in your web browser to view and interact with the application.
 ## Project Structure
 - `index.html`: The main HTML file containing the structure of the application.
 - `styles.css`: The CSS file for styling the application.
-- `app.js`: The JavaScript file handling the application's logic.
+- `main.js`: The main JavaScript file that initializes the application and handles imports.
+- `todoList.js`: The JavaScript module managing the to-do list logic.
+- `dom.js`: The JavaScript module for handling DOM manipulation tasks.
+- `storage.js`: The JavaScript module for managing local storage operations.
 
 ## Contributing
 Feel free to fork this repository and submit pull requests for any improvements or bug fixes.
