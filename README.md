@@ -1,27 +1,37 @@
 ## Overview
-This is a basic JavaScript-based To-Do List application that allows users to add tasks, mark them as completed, edit, and delete them as well as import and export list of tasks.
-The application uses just vanilla Javascript and CSS.
+To-Do List Single Page Application(SPA) built with vanila Javascript and CSS that allows users to add tasks, mark them as completed, edit, and delete them as well as import and export list of tasks.
+
+![Application Preview](preview.png)
+
 
 ## Features
-- Add Tasks: Enter a task in the input field and click "Add" to create a new to-do item.
-- Edit Tasks: Click "Edit" to modify the content of a task.
-- Mark as Completed: Click "Complete" to toggle the task's completion status.
-- Delete Tasks: Click "Delete" to remove a task from the list.
-- Import and Export Tasks List: Import and export tasks list in various formats.
-- Responsive Design: The layout adjusts to fit different screen sizes and device types.
+- **Add Tasks**: Enter a task in the input field and click "Add" to create a new to-do item.
+- **Edit Tasks**: Click "Edit" to modify the content of a task.
+- **Mark as Completed**: Click "Complete" to mark the task as completed.
+- **Delete Tasks**: Click "Delete" to remove a task from the list.
+- **Import/Export Tasks**: Import and export tasks list as csv file.
+- **Responsive Design**: The layout adjusts to fit different screen sizes.
 
+## Try It
+https://todo-list-app-7.netlify.app/
 
 ## Getting Started
 ### Clone the Repository
 ```bash
-git clone https://github.com/your-username/your-repository.git
+git clone https://github.com/Alfredomg7/TodoSPA.git
 ```
 ### Navigate to the Project Directory
 ```bash
-cd your-repository
+cd TodoSPA
 ```
-### Open the Application
-Open `index.html` in your web browser to view and interact with the application.
+### Run Application
+#### Using a Local HTTP Server:
+To run the application, you need to serve it using a local HTTP server. You can use Python's built-in HTTP server as shown below:
+#### Using Python3:
+```bash
+python -m http.server 8000
+```
+Then, open your web browser and navigate to `http://localhost:8000`.
 
 ## Project Structure
 - `index.html`: The main HTML file containing the structure of the application.
